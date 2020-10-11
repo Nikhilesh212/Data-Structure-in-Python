@@ -1,44 +1,40 @@
-class tree_node:
-    def __init__(self,data=None):
-        self.data=data
-        self.left=None
-        self.right=None
-    def append(self,data):
-        if(self.data is None):
-            self.data=data
-            self.right=None
-            self.left=None
-        else:
-            temp=tree_node(data)
-            curr=self
-            while(True):
-                if(data>=curr.data):
-                    if(curr.right is None):
-                        curr.right=temp
-                        break
-                    else:
-                        curr=curr.right
-                else:
-                    if(curr.left is None):
-                        curr.left=temp
-                        break
-                    else:
-                        curr=curr.left
-def print_tree(Tree):
-    if(Tree.left):
-        print_tree(Tree.left)
-    if(Tree.right):
-        print_tree(Tree.right)
-    print(Tree.data)
-def tree_height(tree):
-    if(tree is None):
-        return 0
-    return 1+max(tree_height(tree.left),tree_height(tree.right))
-n=int(input())
-str=list(map(int,input().split()))
-str.sort()
-set(str)
-Tree=tree_node()
-for i in str:
-    Tree.append(i)
-print(len(str))
+import sys
+
+
+class TreeHeight:
+    def read(self):
+        self.n = int(sys.stdin.readline())
+        self.parent = list(map(int, sys.stdin.readline().split()))
+
+    def compute_height(self):
+        maxHeight = 0
+        heights = [0] * len(self.parent)
+        for vertex in range(self.n):
+            if (heights[vertex] != 0):
+                continue
+            height = 0
+            i = vertex
+            while i != -1:
+                if (heights[i] != 0):
+                    height += heights[i]
+                    break
+                height += 1
+                i = self.parent[i]
+            maxHeight = max(maxHeight, height)
+            i = vertex
+            while i != -1:
+                if (heights[i] != 0):
+                    break
+                heights[i] = height
+                height -= 1
+                i = self.parent[i]
+        return maxHeight
+
+
+def main():
+    tree = TreeHeight()
+    tree.read()
+    print(tree.compute_height())
+
+
+main()
