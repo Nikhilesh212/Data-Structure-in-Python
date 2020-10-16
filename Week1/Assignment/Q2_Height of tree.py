@@ -1,6 +1,5 @@
 import sys
 
-
 class TreeHeight:
     def read(self):
         self.n = int(sys.stdin.readline())
