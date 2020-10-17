@@ -1,9 +1,9 @@
 def p(i):
-    return i//2
+    return i-1//2
 def leftchild(i):
-    return 2*i
-def rightchild(i):
     return 2*i+1
+def rightchild(i):
+    return 2*i+2
 
 class heap:
     def __init__(self):
