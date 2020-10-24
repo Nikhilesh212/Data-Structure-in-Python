@@ -4,6 +4,7 @@ def leftchild(i):
     return (2*i)+1
 def rightchild(i):
     return (2*i)+2
+
 def shiftdown(i,heap,count):
     maxidx=i
     l=leftchild(i)
@@ -16,11 +17,9 @@ def shiftdown(i,heap,count):
         heap[maxidx],heap[i]=heap[i],heap[maxidx]
         count.append((i,maxidx))
         shiftdown(maxidx,heap,count)
-    return count
 
 N=int(input())
 n=list(map(int,input().split()))
-
 i=N//2
 c=[]
 while(i>=0):

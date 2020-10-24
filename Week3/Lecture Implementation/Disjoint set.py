@@ -9,8 +9,8 @@ class disjoint_set:
 
     def find(self,i):
         while(i!=self.parent[i]):
-            i=self.parent[i]
-        return i
+            self.parent[i]=self.find(self.parent[i])
+        return self.parent[i]
 
     def merge(self,i,j):
         i_id=self.find(i)

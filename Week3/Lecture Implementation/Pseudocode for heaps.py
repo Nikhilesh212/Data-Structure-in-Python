@@ -22,7 +22,6 @@ class heap:
     def __init__(self):
         self.heap=[]
 
-
     def shiftup(self,i):
         while i>=1 and self.heap[p(i)]>self.heap[i]:
             self.heap[p(i)],self.heap[i]=self.heap[i],self.heap[p(i)]
