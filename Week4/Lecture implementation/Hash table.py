@@ -17,7 +17,6 @@ class hash_table:
             size=len(self.table)
             tablenew = [None]*(2*size)
             self.a=random.randint(1,self.p-1)
-            self.b=random.randint(0,self.p-1)
             for i in self.table:
                 if i:
                     tablenew[self.hash(i[0],size)]=i
