@@ -116,7 +116,6 @@ class AVL:
             rh=node.right.height
         else:
             rh=0
-        print(lh,rh)
         if(lh>rh+1):
             self.rebalance_right(node)
         if(rh>lh+1):
@@ -155,7 +154,7 @@ a=AVL()
 while(True):
     i=int(input())
     if(i==1):
-        l=[14,11,13,12,3,0,9]
+        l=list(map(int,input().split()))
         for i in l:
             a.insert(i)
     elif(i==2):
