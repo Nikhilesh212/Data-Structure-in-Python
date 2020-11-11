@@ -24,6 +24,7 @@ class BST:
             self.tree[leftchild(i)]=data
 
 T=BST()
+print("HELLO")
 while(True):
     i=int(input())
     if(i==1):
