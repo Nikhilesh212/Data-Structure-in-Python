@@ -6,10 +6,17 @@ class Node:
         self.right=None
         self.parent=None
         self.height=1
+        self.size=1
 
 class AVL:
     def __init__(self):
         self.head=None
+
+    def node_size(self,node):
+        if node:
+            return 1+self.node_size(node.left)+self.node_size(node.right)
+        else:
+            return 0
 
     def height(self,i):
         if(i is None):return 0
@@ -24,6 +31,12 @@ class AVL:
                 curr=curr.left
             elif(curr.data<data):
                 curr=curr.right
+
+    def rc_size(self,node):
+        if(node):
+            node.size=self.node_size(node)
+            self.rc_size(node.left)
+            self.rc_size(node.right)
 
     def insert(self,data):
         if self.head is None:
@@ -48,26 +61,23 @@ class AVL:
                         curr.right.parent=curr
                         self.rebalance(curr.right)
                         break
+        self.rc_size(self.head)
 
     def adjustheight(self,head):
         if(head):
             head.height=self.height(head)
             self.adjustheight(head.left)
             self.adjustheight(head.right)
+    def os(self,node,k):
+        s=node.left.size
+        if k== s+1:
+            return node.data
+        elif k<s+1:
+            return self.os(node.left,k)
+        else:
+            return self.os(node.right,k-s-1)
 
     def rotate_right(self,X):
-        # p=node.parent
-        # y=node.left
-        # b=node.left.right
-        # y.parent=p
-        # if(y.data>p.data):
-        #     p.right=y
-        # else:
-        #     p.left=y
-        # node.parent=y
-        # y.right=node
-        # b.parent=node
-        # node.left=b
         B = X.left.right
         X.left.parent = X.parent
         if X.parent and X == X.parent.left:
@@ -123,6 +133,7 @@ class AVL:
         self.adjustheight(node)
         if(p):
             self.rebalance(p)
+        self.rc_size(self.head)
 
     def rebalance_right(self,node):
         m=node.left
@@ -160,5 +171,8 @@ while(True):
     elif(i==2):
         a.p(a.head)
         print("________________________________________")
+    elif(i==3):
+        q=int(input())
+        print(a.os(a.head,q))
     else:
         exit()
